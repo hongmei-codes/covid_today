@@ -2,7 +2,7 @@
     <h1>😷 Covid Today</h1>
     <p>A simple dashboard that visualises 🦠 covid-19 data. Go to the demo page to interact with the data or read more about its features below.</p>
 
-[![Website](https://img.shields.io/website?down_color=red&down_message=offline&label=Demo&style=for-the-badge&up_color=b&up_message=online&url=https%3A%2F%2Fh0ngm3i.pythonanywhere.com)](http://h0ngm3i.pythonanywhere.com/)
+# [Demo](http://h0ngm3i.pythonanywhere.com/)
 
 </div>
 <br/>
