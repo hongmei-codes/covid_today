@@ -64,6 +64,14 @@ CSS styling is used to make the site responsive. To restructure the different co
 ```
 The styling above rearranges flexboxes as columns when the screen size becomes lower than 1000px. 
 
+## Deploying a Flask app
+Deploying a flask app to [pythonanywhere](https://www.pythonanywhere.com/) is fairly simple. You need to follow these steps.
+
+1. sign up for an account at [pythonanywhere](https://www.pythonanywhere.com/)
+2. upload your code to github
+3. open the terminal on pythonanywhere and clone your github repository
+4. configure wsgi.py to add in the correct path to your flask app folder and import your app.py.
+
 ## Technology used
 - [X] python
 - [X] pandas
@@ -71,3 +79,4 @@ The styling above rearranges flexboxes as columns when the screen size becomes l
 - [X] flask
 - [X] html
 - [X] css
+- [X] pythonanywhere
