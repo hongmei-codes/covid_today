@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import pandas as pd
 import folium  # to generate map
 from datetime import datetime, timedelta
+from urllib.error import HTTPError
 
 app = Flask(__name__)
 
@@ -14,6 +15,7 @@ def get_raw_data():
     # get utc date
     utc_datetime = datetime.utcnow()
     utc_date = utc_datetime.strftime('%m-%d-%Y')
+    print(f'🌟{utc_date}')
 
     # construct url
     data_url = f'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/{utc_date}.csv'
@@ -22,14 +24,24 @@ def get_raw_data():
     try:
         # run this code
         raw_data = pd.read_csv(data_url)
-    except Exception as e:
+    except HTTPError as e:
+        print(f'🌟{e}')
         # run the following if there is an error
-        utc_date = (utc_datetime - timedelta(days=1)).strftime('%m-%d-%Y')
-        data_url = f'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/{utc_date}.csv'
-        raw_data = pd.read_csv(data_url)
+        try:
+            utc_date = (utc_datetime - timedelta(days=1)).strftime('%m-%d-%Y')
+            data_url = f'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/{utc_date}.csv'
+            raw_data = pd.read_csv(data_url)
+            print('🌟cannot get today, gotten yesterday')
+        except HTTPError as er:
+            print(f'🌟 second {er}')
+            utc_date = (utc_datetime - timedelta(days=2)).strftime('%m-%d-%Y')
+            data_url = f'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/{utc_date}.csv'
+            raw_data = pd.read_csv(data_url)
+            print('🌟cannot get today, gotten DAY BEFORE yesterday')
     else:
         # no error? run this
         raw_data = pd.read_csv(data_url)
+        print('🌟can get today, gotten today')
 
     # return utc_date, dataframe and url
     return utc_date, raw_data, data_url
