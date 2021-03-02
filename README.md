@@ -7,6 +7,15 @@
 </div>
 <br/>
 
+# Quick Start 🚀
+```shell
+# install requirements
+pip install -r requirements.txt
+
+# start flask app
+python app.py
+```
+
 # Features 🧩
 
 ## Interactive world map bubble chart
