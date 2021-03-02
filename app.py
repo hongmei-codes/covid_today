@@ -57,10 +57,10 @@ def world_total(original_df):
     """
     all_sum = original_df.sum()
 
-    confirmed = int(all_sum['Confirmed'])
-    active = int(all_sum['Active'])
-    deaths = int(all_sum['Deaths'])
-    recovered = int(all_sum['Recovered'])
+    confirmed = format(int(all_sum['Confirmed']), ',')
+    active = format(int(all_sum['Active']), ',')
+    deaths = format(int(all_sum['Deaths']), ',')
+    recovered = format(int(all_sum['Recovered']), ',')
 
     return confirmed, active, deaths, recovered
 
@@ -71,10 +71,16 @@ def top_ten(original_df):
     :param original_df: raw, unprocessed pandas dataframe
     :return: pandas dataframe of top ten countries by confirmed cases
     """
-    top_ten_table = original_df.groupby('Country_Region')\
-        .sum()[['Confirmed']]\
-        .sort_values(by=['Confirmed'], ascending=False)\
-        .nlargest(10, 'Confirmed').to_html()
+    top_ten_df = original_df.groupby('Country_Region') \
+        .sum()[['Confirmed']] \
+        .sort_values(by=['Confirmed'], ascending=False) \
+        .nlargest(10, 'Confirmed')
+
+    # format numbers
+    top_ten_df['Confirmed'] = top_ten_df.apply(lambda x: "{:,}".format(x['Confirmed']), axis=1)
+
+    # convert dataframe to html table
+    top_ten_table = top_ten_df.to_html()
 
     tbody_start_index = top_ten_table.index('</thead>') + 8
     html_table_body = top_ten_table[tbody_start_index:]
@@ -128,4 +134,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
