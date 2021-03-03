@@ -93,7 +93,6 @@ def add_bubble(bubble_map, data):
     Adds bubbles to map object based on data passed in.
     :param bubble_map: this is a folium Map object
     :param data: this is a list of [location name, latitude, longitude, confirmed cases]
-    :returns: does not return anything
     """
     folium.Circle(location=[data[1], data[2]],
                   radius=float(data[3]) * 1,
