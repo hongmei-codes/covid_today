@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import pandas as pd
-import folium  # to generate map
+import folium
 from datetime import datetime, timedelta
 from urllib.error import HTTPError
 
