@@ -89,3 +89,4 @@ Deploying a flask app to [pythonanywhere](https://www.pythonanywhere.com/) is fa
 - [X] html
 - [X] css
 - [X] pythonanywhere
+
